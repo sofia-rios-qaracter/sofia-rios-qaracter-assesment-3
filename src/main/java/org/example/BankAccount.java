@@ -20,7 +20,7 @@ public class BankAccount {
         this(accountNumber, "Unknown");
     }
     public BankAccount(){
-        this("00000000");
+        this("00000000-R");
     }
 
     public void setAccountNumber(String accountNumber) {

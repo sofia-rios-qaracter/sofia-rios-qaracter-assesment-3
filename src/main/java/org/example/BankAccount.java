@@ -1,5 +1,7 @@
 package org.example;
 
+import exceptions.InsufficientFundsException;
+
 public class BankAccount {
     private String accountNumber;
     private String accountHolder;
@@ -37,15 +39,28 @@ public class BankAccount {
         return this.accountNumber;
     }
 
+    private double setBalance(double balanceToChange) throws InsufficientFundsException{
+        if(this.balance + balanceToChange < 0) throw new InsufficientFundsException();
+
+        this.balance += balanceToChange;
+
+        return this.balance;
+    }
+
     public double withdraw(double withdraw){
-        this.balance -= Math.abs(withdraw);
-        return balance;
+        double balanceBefore = 0.0;
+
+        try{
+            balanceBefore = this.setBalance(-Math.abs(withdraw));
+        } catch (InsufficientFundsException e){
+            System.out.println(e.toString());
+        }
+
+        return balanceBefore;
     }
 
     public double deposit(double deposit){
-        this.balance += Math.abs(deposit);
-
-        return balance;
+        return this.setBalance(Math.abs(deposit));
     }
 
     public double getBalance(){

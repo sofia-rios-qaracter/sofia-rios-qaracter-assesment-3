@@ -51,4 +51,20 @@ public class BankAccount {
     public double getBalance(){
         return this.balance;
     }
+
+    public double transferTo(double quantity, BankAccount accountToTransfer){
+        this.withdraw(quantity);
+        accountToTransfer.deposit(quantity);
+
+        return quantity;
+    }
+
+    public String getAccountInfo(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Account number: ").append(this.accountNumber).append("\n");
+        sb.append("Account holder: ").append(this.accountHolder).append("\n");
+        sb.append("Balance: ").append(this.balance).append("\n");
+
+        return sb.toString();
+    }
 }
